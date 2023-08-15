@@ -1,0 +1,22 @@
+---
+name: xcop
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+concurrency:
+  group: xcop-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  xcop:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: g4s8/xcop-action@v1.3
+        with:
+          files: |
+            **/*.xsl
+            **/*.xml
